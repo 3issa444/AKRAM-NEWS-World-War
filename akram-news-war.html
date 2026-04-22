@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKRAM NEWS | غرفة العمليات — الحرب الأمريكية الإيرانية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c0392b;
+    --dark-red: #922b21;
+    --gold: #f39c12;
+    --dark: #0a0a0f;
+    --dark2: #12121a;
+    --dark3: #1a1a2e;
+    --text: #f0ece3;
+    --muted: #8a8a9a;
+    --white: #ffffff;
+    --green: #27ae60;
+    --blue: #2980b9;
+    --orange: #e67e22;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== NETWORK BAR ===== */
+  .network-bar {
+    background: #070710;
+    border-bottom: 1px solid #1a1a2e;
+    padding: 6px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .network-links { display: flex; gap: 20px; }
+  .network-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .network-links a:hover { color: var(--gold); }
+  .network-links a.active-link { color: var(--gold); font-weight: 700; }
+
+  /* ===== TICKER ===== */
+  .ticker-bar {
+    background: var(--red);
+    padding: 8px 0;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--gold);
+  }
+  .ticker-label {
+    background: var(--gold);
+    color: #000;
+    font-weight: 900;
+    padding: 2px 16px;
+    font-size: 13px;
+    position: absolute;
+    right: 0; top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 60px;
+    animation: ticker 35s linear infinite;
+    white-space: nowrap;
+    padding-right: 120px;
+  }
+  .ticker-track span { font-size: 13px; font-weight: 600; }
+  .ticker-track span::before { content: "◆ "; color: var(--gold); }
+  @keyframes ticker {
+    from { transform: translateX(100vw); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* ===== HEADER ===== */
+  .studio-header {
+    background: linear-gradient(135deg, var(--dark2), var(--dark3));
+    border-bottom: 1px solid #2a2a3e;
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .studio-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(192,57,43,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-icon {
+    width: 52px; height: 52px;
+    background: var(--red);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 0 20px rgba(192,57,43,0.5);
+    animation: pulse-logo 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse-logo {
+    0%,100% { box-shadow: 0 0 20px rgba(192,57,43,0.5); }
+    50% { box-shadow: 0 0 35px rgba(192,57,43,0.85); }
+  }
+  .logo-text h1 { font-family: 'Amiri', serif; font-size: 26px; font-weight: 700; color: var(--white); line-height: 1; }
+  .logo-text .sub { font-size: 11px; color: var(--gold); letter-spacing: 2px; margin-top: 4px; }
+  .header-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .live-badge {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--red); padding: 7px 18px;
+    border-radius: 6px; font-weight: 700; font-size: 13px;
+    letter-spacing: 2px; box-shadow: 0 0 18px rgba(192,57,43,0.4);
+  }
+  .live-dot { width: 9px; height: 9px; background: var(--white); border-radius: 50%; animation: blink 1s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .clock { font-size: 18px; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; direction: ltr; }
+  .war-badge {
+    background: linear-gradient(135deg, #7b1015, var(--red));
+    border: 1px solid rgba(255,100,100,0.3);
+    padding: 6px 14px; border-radius: 6px;
+    font-size: 11px; font-weight: 700; color: #ffcccc;
+    letter-spacing: 1px; white-space: nowrap;
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .main-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    min-height: calc(100vh - 160px);
+  }
+
+  /* ===== CENTER ===== */
+  .center-stage { padding: 28px 36px; border-left: 1px solid #2a2a3e; }
+
+  /* ===== HERO BANNER ===== */
+  .hero-banner {
+    background: linear-gradient(135deg, #1a0505, #2a0a0a, var(--dark3));
+    border: 1px solid rgba(192,57,43,0.4);
+    border-top: 4px solid var(--red);
+    border-radius: 14px;
+    padding: 30px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(192,57,43,0.12) 0%, transparent 60%);
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .eyebrow-tag {
+    background: var(--red); color: var(--white);
+    font-size: 10px; font-weight: 900; padding: 4px 12px;
+    border-radius: 4px; letter-spacing: 2px;
+    animation: pulse-tag 2s ease-in-out infinite;
+  }
+  @keyframes pulse-tag { 0%,100%{opacity:1} 50%{opacity:0.7} }
+  .eyebrow-date { font-size: 12px; color: var(--muted); }
+  .hero-title {
+    font-family: 'Amiri', serif;
+    font-size: 30px; font-weight: 700;
+    color: var(--white); line-height: 1.5;
+    margin-bottom: 14px; position: relative;
+  }
+  .hero-body { font-size: 15px; color: #ccc8be; line-height: 1.9; position: relative; }
+  .hero-body strong { color: var(--gold); }
+  .hero-stats {
+    display: flex; gap: 14px; margin-top: 22px;
+    flex-wrap: wrap; position: relative;
+  }
+  .h-stat {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(192,57,43,0.35);
+    border-radius: 10px; padding: 14px 18px;
+    flex: 1; min-width: 100px; text-align: center;
+  }
+  .h-stat-num { font-size: 26px; font-weight: 900; color: var(--red); display: block; line-height: 1; }
+  .h-stat-label { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+  /* ===== TABS ===== */
+  .section-tabs {
+    display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: var(--dark2); border: 1px solid #2a2a3e;
+    color: var(--muted); padding: 9px 18px; border-radius: 8px;
+    cursor: pointer; font-family: 'Cairo', sans-serif;
+    font-size: 13px; font-weight: 600; transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { border-color: var(--red); color: var(--text); }
+  .tab-btn.active {
+    background: var(--red); border-color: var(--red);
+    color: var(--white); box-shadow: 0 4px 14px rgba(192,57,43,0.4);
+  }
+  .news-section { display: none; animation: fadeIn 0.35s ease; }
+  .news-section.active { display: block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ===== NEWS CARD ===== */
+  .news-card {
+    background: linear-gradient(135deg, var(--dark2), var(--dark3));
+    border: 1px solid #2a2a3e;
+    border-right: 4px solid var(--red);
+    border-radius: 12px; padding: 24px;
+    margin-bottom: 18px; position: relative; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .news-card:hover { transform: translateX(-3px); border-right-color: var(--gold); }
+  .news-card.blue-card { border-right-color: var(--blue); }
+  .news-card.green-card { border-right-color: var(--green); }
+  .news-card.orange-card { border-right-color: var(--orange); }
+  .card-cat {
+    display: inline-block; background: var(--red);
+    color: var(--white); font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 4px; letter-spacing: 1px; margin-bottom: 12px;
+  }
+  .card-cat.blue { background: var(--blue); }
+  .card-cat.green { background: var(--green); }
+  .card-cat.orange { background: var(--orange); }
+  .card-cat.dark { background: #2c3e50; }
+  .card-title {
+    font-family: 'Amiri', serif; font-size: 20px;
+    font-weight: 700; color: var(--white); line-height: 1.6; margin-bottom: 10px;
+  }
+  .card-body { font-size: 14px; color: #c5c0b5; line-height: 1.85; }
+  .card-body strong { color: var(--gold); }
+  .card-meta {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px solid #1e1e2a; flex-wrap: wrap;
+  }
+  .meta-tag {
+    font-size: 11px; color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .meta-tag.hot { color: var(--red); border: 1px solid rgba(192,57,43,0.3); }
+
+  /* POWERS TABLE */
+  .powers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px; margin-top: 16px;
+  }
+  .power-card {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px; padding: 18px;
+    border: 1px solid #2a2a3e;
+    transition: border-color 0.2s;
+  }
+  .power-card:hover { border-color: rgba(192,57,43,0.4); }
+  .power-flag { font-size: 30px; margin-bottom: 10px; }
+  .power-name { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .power-role {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    padding: 3px 10px; border-radius: 4px; display: inline-block; margin-bottom: 10px;
+  }
+  .role-attack { background: rgba(192,57,43,0.2); color: #ff9999; }
+  .role-defend { background: rgba(39,174,96,0.2); color: #66ff99; }
+  .role-support { background: rgba(243,156,18,0.15); color: #ffd066; }
+  .role-neutral { background: rgba(100,100,100,0.2); color: #cccccc; }
+  .power-desc { font-size: 13px; color: #b0aaa0; line-height: 1.7; }
+
+  /* TIMELINE */
+  .war-timeline { position: relative; padding-right: 28px; }
+  .war-timeline::before {
+    content: ''; position: absolute;
+    right: 10px; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, var(--red), rgba(192,57,43,0.1));
+  }
+  .wt-item {
+    position: relative; padding: 16px 30px 16px 0;
+    border-bottom: 1px solid #1e1e2a;
+  }
+  .wt-dot {
+    position: absolute; right: 2px; top: 20px;
+    width: 16px; height: 16px;
+    border-radius: 50%; border: 3px solid var(--dark);
+  }
+  .wt-dot.red { background: var(--red); }
+  .wt-dot.gold { background: var(--gold); }
+  .wt-dot.green { background: var(--green); }
+  .wt-dot.blue { background: var(--blue); }
+  .wt-date { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+  .wt-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+  .wt-desc { font-size: 13px; color: #b0aaa0; line-height: 1.7; }
+
+  /* CEASEFIRE ALERT */
+  .ceasefire-alert {
+    background: linear-gradient(135deg, rgba(39,174,96,0.12), rgba(39,174,96,0.05));
+    border: 2px solid var(--green);
+    border-radius: 12px; padding: 20px 24px;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 16px;
+  }
+  .cf-icon { font-size: 36px; flex-shrink: 0; }
+  .cf-title { font-size: 17px; font-weight: 700; color: #66ff99; margin-bottom: 6px; }
+  .cf-body { font-size: 14px; color: #b0e0b0; line-height: 1.7; }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar { background: var(--dark2); padding: 22px 18px; }
+  .sidebar-title {
+    font-size: 11px; letter-spacing: 2px; color: var(--gold);
+    font-weight: 700; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sidebar-title::after { content:''; flex:1; height:1px; background:#2a2a3e; }
+
+  /* ALERT LEVEL */
+  .alert-box {
+    background: linear-gradient(135deg, #1a0505, #2a0808);
+    border: 1px solid rgba(192,57,43,0.5);
+    border-radius: 10px; padding: 16px; margin-bottom: 20px; text-align: center;
+  }
+  .alert-level { font-size: 12px; color: var(--muted); margin-bottom: 6px; letter-spacing: 1px; }
+  .alert-status {
+    font-size: 20px; font-weight: 900; color: var(--red);
+    animation: pulse-tag 1.5s ease-in-out infinite;
+  }
+  .alert-sub { font-size: 11px; color: #c5c0b5; margin-top: 6px; line-height: 1.5; }
+
+  /* MAP BOX */
+  .map-box {
+    background: var(--dark3); border: 1px solid #2a2a3e;
+    border-radius: 10px; padding: 14px; margin-bottom: 20px;
+  }
+  .map-visual {
+    background: #0d1a1a;
+    border-radius: 8px; height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--muted); margin-bottom: 12px;
+    position: relative; overflow: hidden;
+    border: 1px solid #1a2e2e;
+  }
+  .map-dot {
+    position: absolute; width: 10px; height: 10px;
+    border-radius: 50%; animation: radar 2s ease-in-out infinite;
+  }
+  @keyframes radar {
+    0%,100%{transform:scale(1); opacity:1}
+    50%{transform:scale(2.5); opacity:0.3}
+  }
+  .map-dot.usa { background:#3498db; top:35%; left:15%; animation-delay:0s; }
+  .map-dot.iran { background:#e74c3c; top:40%; left:62%; animation-delay:0.5s; }
+  .map-dot.israel { background:#2ecc71; top:44%; left:55%; animation-delay:0.3s; }
+  .map-dot.russia { background:#e67e22; top:22%; left:65%; animation-delay:0.7s; }
+  .map-dot.china { background:#f39c12; top:38%; left:80%; animation-delay:1s; }
+  .map-legend { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ml-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #b0aaa0; }
+  .ml-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* BREAKING ITEMS */
+  .breaking-item { padding: 12px 0; border-bottom: 1px solid #1e1e2a; cursor: pointer; transition: padding-right 0.2s; }
+  .breaking-item:hover { padding-right: 6px; }
+  .bi-cat { font-size: 10px; color: var(--red); font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+  .bi-text { font-size: 13px; color: #c5c0b5; line-height: 1.6; font-weight: 600; }
+  .bi-time { font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+  /* POLL */
+  .poll-box {
+    background: var(--dark3); border: 1px solid #2a2a3e;
+    border-radius: 12px; padding: 18px; margin-top: 20px;
+  }
+  .poll-q { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 14px; line-height: 1.6; }
+  .poll-opt {
+    background: var(--dark2); border: 1px solid #2a2a3e;
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;
+    cursor: pointer; font-family: 'Cairo', sans-serif;
+    font-size: 13px; color: var(--text); width: 100%; text-align: right; transition: all 0.2s;
+  }
+  .poll-opt:hover { border-color: var(--red); background: rgba(192,57,43,0.08); }
+  .poll-opt.voted { border-color: var(--red); background: rgba(192,57,43,0.15); color: var(--white); }
+  .poll-result { display: none; margin-top: 10px; }
+  .poll-result.show { display: block; }
+  .pr-bar-wrap { margin-bottom: 9px; }
+  .pr-label { font-size: 12px; color: #c5c0b5; margin-bottom: 3px; display: flex; justify-content: space-between; }
+  .pr-track { height: 7px; background: #2a2a3e; border-radius: 8px; overflow: hidden; }
+  .pr-fill { height: 100%; border-radius: 8px; transition: width 1s ease; }
+
+  /* SOURCES */
+  .sources-section {
+    background: var(--dark2); border-top: 1px solid #2a2a3e; padding: 28px 36px;
+  }
+  .sources-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 12px; margin-top: 16px;
+  }
+  .src-card {
+    background: var(--dark3); border: 1px solid #2a2a3e;
+    border-right: 3px solid var(--red); border-radius: 10px; padding: 14px 16px;
+  }
+  .src-org { font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 5px; }
+  .src-desc { font-size: 13px; color: #c5c0b5; line-height: 1.6; }
+  .src-url { font-size: 11px; color: var(--muted); margin-top: 5px; direction: ltr; }
+
+  /* FOOTER */
+  .studio-footer {
+    background: #070710; border-top: 1px solid #1a1a2e;
+    padding: 14px 40px; display: flex; align-items: center;
+    justify-content: space-between; font-size: 12px; color: var(--muted);
+    flex-wrap: wrap; gap: 8px;
+  }
+  .footer-brand { font-weight: 700; color: var(--gold); }
+  .footer-nav { display: flex; gap: 16px; }
+  .footer-nav a { color: var(--muted); text-decoration: none; font-size: 11px; }
+  .footer-nav a:hover { color: var(--gold); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .main-content { grid-template-columns: 1fr 260px; }
+    .center-stage { padding: 20px 22px; }
+    .hero-title { font-size: 24px; }
+    .studio-header { padding: 14px 22px; }
+  }
+  @media (max-width: 768px) {
+    .main-content { grid-template-columns: 1fr; }
+    .sidebar { border-top: 1px solid #2a2a3e; }
+    .center-stage { padding: 16px; border-left: none; }
+    .studio-header { padding: 12px 16px; gap: 10px; }
+    .logo-text .sub { display: none; }
+    .logo-icon { width: 42px; height: 42px; font-size: 20px; }
+    .logo-text h1 { font-size: 20px; }
+    .clock { font-size: 14px; }
+    .live-badge { padding: 6px 12px; font-size: 12px; }
+    .war-badge { display: none; }
+    .ticker-label { font-size: 11px; padding: 2px 10px; }
+    .ticker-track { padding-right: 100px; }
+    .ticker-track span { font-size: 11px; }
+    .hero-banner { padding: 18px; }
+    .hero-title { font-size: 20px; }
+    .hero-body { font-size: 13px; }
+    .section-tabs { gap: 6px; }
+    .tab-btn { padding: 8px 11px; font-size: 12px; }
+    .news-card { padding: 16px; }
+    .card-title { font-size: 17px; }
+    .card-body { font-size: 13px; }
+    .powers-grid { grid-template-columns: 1fr 1fr; }
+    .network-bar { padding: 5px 14px; font-size: 10px; }
+    .sources-section { padding: 20px 16px; }
+    .studio-footer { padding: 12px 16px; font-size: 11px; }
+    .ceasefire-alert { flex-direction: column; gap: 10px; padding: 16px; }
+    .cf-icon { font-size: 28px; }
+  }
+  @media (max-width: 480px) {
+    .logo-text h1 { font-size: 17px; }
+    .logo-icon { width: 36px; height: 36px; font-size: 16px; }
+    .clock { font-size: 13px; }
+    .hero-title { font-size: 17px; }
+    .tab-btn { font-size: 11px; padding: 7px 9px; flex: 1; text-align: center; min-width: calc(50% - 6px); }
+    .powers-grid { grid-template-columns: 1fr; }
+    .h-stat-num { font-size: 22px; }
+    .card-title { font-size: 16px; }
+    .wt-title { font-size: 14px; }
+    .network-links { display: none; }
+    .footer-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NETWORK BAR -->
+<div class="network-bar">
+  <div class="network-links">
+    <a href="#">🏠 الرئيسية</a>
+    <a href="#" class="active-link">⚔️ غرفة العمليات</a>
+    <a href="vape-news-studio.html">🚭 نشرة الفيب</a>
+    <a href="#">🌍 العالم</a>
+  </div>
+  <div>AKRAM NEWS NETWORK · إصدار خاص · أبريل 2026</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-label">🔴 عاجل</div>
+  <div class="ticker-track">
+    <span>8 أبريل 2026: ترمب يعلن هدنة أسبوعين مع إيران بوساطة باكستانية</span>
+    <span>مقتل المرشد خامنئي أكدته طهران رسمياً في مارس 2026</span>
+    <span>تقارير: الصين وروسيا درستا تزويد إيران بأنظمة رادار متطورة</span>
+    <span>خسائر اقتصاد الخليج تتخطى 20 مليار دولار جراء الحرب</span>
+    <span>إيران ردت بضربات على إسرائيل والكويت والبحرين والإمارات وقطر</span>
+    <span>الولايات المتحدة دمرت القدرات البحرية الإيرانية في خليج عمان</span>
+    <span>الحوثيون دخلوا المعركة بصواريخ ومسيّرات باتجاه إسرائيل مارس 2026</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="studio-header">
+  <div class="logo-area">
+    <div class="logo-icon">📡</div>
+    <div class="logo-text">
+      <h1>AKRAM NEWS</h1>
+      <div class="sub">غرفة العمليات · الشرق الأوسط</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="war-badge">⚔️ عملية الغضب الملحمي</div>
+    <div class="live-badge"><div class="live-dot"></div>مباشر</div>
+    <div class="clock" id="clock">00:00:00</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-content">
+
+  <!-- CENTER -->
+  <div class="center-stage">
+
+    <!-- CEASEFIRE ALERT -->
+    <div class="ceasefire-alert">
+      <div class="cf-icon">🕊️</div>
+      <div>
+        <div class="cf-title">🟢 هدنة سارية — 8 أبريل 2026</div>
+        <div class="cf-body">أعلن الرئيس ترمب وقف إطلاق النار لمدة أسبوعين بوساطة باكستانية، بعد 40 يوماً من الحرب. المفاوضات مستمرة والوضع هش.</div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero-banner">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-tag">🔴 تغطية خاصة</span>
+        <span class="eyebrow-date">فبراير — أبريل 2026</span>
+      </div>
+      <div class="hero-title">الحرب الأمريكية الإسرائيلية على إيران: من اندلاع الشرارة إلى الهدنة</div>
+      <div class="hero-body">
+        في <strong>28 فبراير 2026</strong> شنّت الولايات المتحدة وإسرائيل ضربات عسكرية واسعة على إيران تحت اسم <strong>"الغضب الملحمي"</strong>، استهدفت المنشآت النووية والعسكرية وقيادات الحرس الثوري. أسفرت عن مقتل المرشد الأعلى خامنئي وتدمير منشأة نطنز النووية. ردّت إيران بضربات على دول الجوار، قبل أن تُعلَن الهدنة بعد 40 يوماً من القتال.
+      </div>
+      <div class="hero-stats">
+        <div class="h-stat">
+          <span class="h-stat-num">40</span>
+          <div class="h-stat-label">يوماً من المعارك</div>
+        </div>
+        <div class="h-stat">
+          <span class="h-stat-num">6+</span>
+          <div class="h-stat-label">دول انجرت للصراع</div>
+        </div>
+        <div class="h-stat">
+          <span class="h-stat-num">20B$</span>
+          <div class="h-stat-label">خسائر اقتصاد الخليج</div>
+        </div>
+        <div class="h-stat">
+          <span class="h-stat-num">100K</span>
+          <div class="h-stat-label">جندي احتياطي إسرائيلي</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="section-tabs">
+      <button class="tab-btn active" onclick="showSection('timeline', this)">📅 المسار الزمني</button>
+      <button class="tab-btn" onclick="showSection('powers', this)">🌍 القوى العظمى</button>
+      <button class="tab-btn" onclick="showSection('ops', this)">⚔️ العمليات</button>
+      <button class="tab-btn" onclick="showSection('diplo', this)">🕊️ الدبلوماسية</button>
+    </div>
+
+    <!-- SECTION: TIMELINE -->
+    <div class="news-section active" id="sec-timeline">
+      <div class="news-card">
+        <span class="card-cat">📅 الجدول الزمني الكامل</span>
+        <div class="card-title">من الاحتجاجات إلى الهدنة — كل ما جرى</div>
+        <div class="war-timeline">
+
+          <div class="wt-item">
+            <div class="wt-dot red"></div>
+            <div class="wt-date">ديسمبر 2025</div>
+            <div class="wt-title">اندلاع الاحتجاجات الإيرانية</div>
+            <div class="wt-desc">موجة احتجاجات واسعة بسبب الانهيار الاقتصادي وتراجع الريال، امتدت لأكثر من 100 مدينة — الأكبر منذ ثورة 1979.</div>
+          </div>
+
+          <div class="wt-item">
+            <div class="wt-dot gold"></div>
+            <div class="wt-date">يناير 2026</div>
+            <div class="wt-title">ترمب يهدد وطهران ترد</div>
+            <div class="wt-desc">وجّه ترمب تحذيرات علنية عبر Truth Social، ومسؤولون إيرانيون أعلنوا "الاستعداد للحرب" في 13 يناير.</div>
+          </div>
+
+          <div class="wt-item">
+            <div class="wt-dot gold"></div>
+            <div class="wt-date">19 فبراير 2026</div>
+            <div class="wt-title">الحشد العسكري الأمريكي</div>
+            <div class="wt-desc">أرسلت واشنطن حاملات طائرات وغواصات وسفناً حربية إلى الشرق الأوسط، ونشرت وحدات من الفرقة 82 المحمولة جوًا في الكويت والإمارات.</div>
+          </div>
+
+          <div class="wt-item">
+            <div class="wt-dot red"></div>
+            <div class="wt-date">28 فبراير 2026 — ساعة الصفر</div>
+            <div class="wt-title">🔴 انطلاق عملية "الغضب الملحمي"</div>
+            <div class="wt-desc">شنّت الولايات المتحدة وإسرائيل ضربات جوية متزامنة على طهران والمنشآت النووية والعسكرية الإيرانية. قاذفات B-2 الأمريكية استهدفت مخازن صواريخ باليستية محصنة.</div>
+          </div>
+
+          <div class="wt-item">
+            <div class="wt-dot red"></div>
+            <div class="wt-date">1 مارس 2026</div>
+            <div class="wt-title">مقتل خامنئي وانهيار القيادة</div>
+            <div class="wt-desc">أكدت وسائل الإعلام الإيرانية الرسمية مقتل المرشد الأعلى خامنئي. أعلنت إيران حداداً 40 يوماً وشكّلت مجلس قيادة مؤقتاً برئاسة لاريجاني.</div>
+          </div>
+
+          <div class="wt-item">
+            <div class="wt-dot red"></div>
+            <div class="wt-date">مارس 2026</div>
+            <div class="wt-title">الرد الإيراني والتوسع الإقليمي</div>
+            <div class="wt-desc">ردّت إيران بضربات على إسرائيل وسوريا والأردن والكويت والبحرين والإمارات وقطر. الحوثيون دخلوا المعركة بمسيّرات وصواريخ باتجاه إسرائيل.</div>
+          </div>
+
+          <div class="wt-item">
+            <div class="wt-dot green"></div>
+            <div class="wt-date">8 أبريل 2026</div>
+            <div class="wt-title">🕊️ إعلان الهدنة</div>
+            <div class="wt-desc">أعلن ترمب في الساعات الأولى من الأربعاء وقف إطلاق النار لأسبوعين بوساطة باكستانية، بعد مفاوضات مكثفة عبر قنوات سرية.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: POWERS -->
+    <div class="news-section" id="sec-powers">
+      <div class="news-card">
+        <span class="card-cat">🌍 القوى العظمى</span>
+        <div class="card-title">خريطة المواقف الدولية — من مع من؟</div>
+        <div class="powers-grid">
+
+          <div class="power-card">
+            <div class="power-flag">🇺🇸</div>
+            <div class="power-name">الولايات المتحدة</div>
+            <div class="power-role role-attack">⚔️ قائد العمليات</div>
+            <div class="power-desc">قادت العمليات العسكرية بقاذفات B-2 وحاملات الطائرات. أعلنت تدمير القدرات البحرية الإيرانية في خليج عمان. دعت الحرس الثوري لإلقاء السلاح.</div>
+          </div>
+
+          <div class="power-card">
+            <div class="power-flag">🇮🇱</div>
+            <div class="power-name">إسرائيل</div>
+            <div class="power-role role-attack">⚔️ شريك العمليات</div>
+            <div class="power-desc">استدعت 100 ألف جندي احتياطي. شاركت في ضرب منشآت إيران النووية والدفاعات الجوية. تلقّت هجمات إيرانية على حيفا وتل أبيب.</div>
+          </div>
+
+          <div class="power-card">
+            <div class="power-flag">🇷🇺</div>
+            <div class="power-name">روسيا</div>
+            <div class="power-role role-support">🔶 دعم استخباراتي</div>
+            <div class="power-desc">رصدت تقارير أمريكية تحركات روسية لدعم إيران استخباراتياً وعسكرياً لتحديد فاعلية الضربات الأمريكية الإسرائيلية. تميل للدعم المباشر.</div>
+          </div>
+
+          <div class="power-card">
+            <div class="power-flag">🇨🇳</div>
+            <div class="power-name">الصين</div>
+            <div class="power-role role-support">🔶 دعم تكنولوجي</div>
+            <div class="power-desc">تقارير عن دراسة تزويد إيران بأنظمة رادار متطورة. تميل للدعم التكنولوجي الهادئ. وصفت العمليات الأمريكية بـ"محاولة فرض هيمنة عسكرية".</div>
+          </div>
+
+          <div class="power-card">
+            <div class="power-flag">🇵🇰</div>
+            <div class="power-name">باكستان</div>
+            <div class="power-role role-neutral">🕊️ وساطة</div>
+            <div class="power-desc">لعبت دور الوسيط الرئيسي لإنهاء الحرب، وتوصلت إلى اتفاق وقف إطلاق النار في 8 أبريل 2026.</div>
+          </div>
+
+          <div class="power-card">
+            <div class="power-flag">🇹🇷</div>
+            <div class="power-name">تركيا</div>
+            <div class="power-role role-neutral">🕊️ وسيط</div>
+            <div class="power-desc">شاركت في المساعي الدبلوماسية لوقف إطلاق النار إلى جانب مصر والأمم المتحدة.</div>
+          </div>
+
+          <div class="power-card">
+            <div class="power-flag">🇾🇪</div>
+            <div class="power-name">الحوثيون</div>
+            <div class="power-role role-defend">🟢 حليف إيران</div>
+            <div class="power-desc">دخلوا المعركة في أواخر مارس بهجمات بطائرات مسيّرة وصواريخ باتجاه أهداف في إسرائيل.</div>
+          </div>
+
+          <div class="power-card">
+            <div class="power-flag">🌍</div>
+            <div class="power-name">دول الخليج</div>
+            <div class="power-role role-neutral">⚠️ خسائر اقتصادية</div>
+            <div class="power-desc">تكبّدت 18-20 مليار دولار خسائر اقتصادية. اعتقلت قطر 10 عناصر من الحرس الثوري داخل أراضيها.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: OPS -->
+    <div class="news-section" id="sec-ops">
+      <div class="news-card">
+        <span class="card-cat">⚔️ عسكري</span>
+        <div class="card-title">عملية الغضب الملحمي — تفاصيل الضربات</div>
+        <div class="card-body">
+          شنّت الولايات المتحدة وإسرائيل ضربات جوية منسّقة استهدفت <strong>منشأة نطنز النووية</strong>، ومستشفيي خاتم الأنبياء وغاندي، وقيادات الحرس الثوري ومنصات الصواريخ البالستية.
+        </div>
+        <div class="card-meta">
+          <span class="meta-tag hot">🔴 نووي</span>
+          <span class="meta-tag">B-2 Spirit</span>
+          <span class="meta-tag">قنابل 2000 رطل</span>
+        </div>
+      </div>
+
+      <div class="news-card blue-card">
+        <span class="card-cat blue">🌊 بحري</span>
+        <div class="card-title">تدمير الأسطول الإيراني في خليج عمان</div>
+        <div class="card-body">
+          أعلن مسؤولون أمريكيون إلحاق <strong>أضرار جسيمة بالقدرات البحرية الإيرانية</strong> في خليج عمان، حيث دُمِّرت عدة سفن حربية واستُهدفت قواعد بحرية رئيسية.
+        </div>
+        <div class="card-meta">
+          <span class="meta-tag">خليج عمان</span>
+          <span class="meta-tag">أسطول أمريكي</span>
+        </div>
+      </div>
+
+      <div class="news-card orange-card">
+        <span class="card-cat orange">🚀 رد إيراني</span>
+        <div class="card-title">إيران تضرب 6 دول وتستهدف أربيل</div>
+        <div class="card-body">
+          ردّت إيران بصواريخ ومسيّرات على <strong>إسرائيل وسوريا والأردن والكويت والبحرين والإمارات وقطر</strong>. في كردستان العراق استهدفت مطار أربيل والقنصلية الأمريكية. في إسرائيل أصابت مبنى في الشمال وأنباء عن ضربات في حيفا وتل أبيب.
+        </div>
+        <div class="card-meta">
+          <span class="meta-tag hot">⚠️ إقليمي</span>
+          <span class="meta-tag">7 دول</span>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <span class="card-cat dark">🤖 تقنية</span>
+        <div class="card-title">هل تجرب الصين أسلحتها في إيران؟</div>
+        <div class="card-body">
+          أثارت تقارير استخباراتية تساؤلات جدية: هل تستخدم روسيا والصين إيران <strong>منصة اختبار ميداني</strong> لتقنياتهما العسكرية؟ أعلنت إيران استخدام منظومة دفاع جوي جديدة لاستهداف مقاتلة أمريكية، في حين كشفت تقارير عن تحركات صينية لتزويدها بأنظمة رادار متطورة.
+        </div>
+        <div class="card-meta">
+          <span class="meta-tag">🇨🇳 تقنية صينية</span>
+          <span class="meta-tag">🇷🇺 استخبارات روسية</span>
+          <span class="meta-tag hot">⚠️ مثير للقلق</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: DIPLOMACY -->
+    <div class="news-section" id="sec-diplo">
+      <div class="news-card green-card">
+        <span class="card-cat green">🕊️ هدنة</span>
+        <div class="card-title">وقف إطلاق النار: كيف تحقق؟</div>
+        <div class="card-body">
+          بعد 40 يوماً من الحرب، أعلن <strong>ترمب في 8 أبريل 2026</strong> هدنة أسبوعين بوساطة باكستانية. تركيا ومصر والأمم المتحدة أسهمت في التمهيد عبر قنوات اتصال غير معلنة واجتماعات مكثفة.
+        </div>
+        <div class="card-meta">
+          <span class="meta-tag">🇵🇰 وساطة باكستانية</span>
+          <span class="meta-tag">أسبوعان</span>
+          <span class="meta-tag hot">⚠️ الوضع هش</span>
+        </div>
+      </div>
+
+      <div class="news-card blue-card">
+        <span class="card-cat blue">🏛️ مفاوضات</span>
+        <div class="card-title">المفاوضات النووية: مسار شائك</div>
+        <div class="card-body">
+          بدأت المفاوضات الأمريكية الإيرانية في 2025 بهدف اتفاق نووي عبر رسالة من ترمب. فشل المسار الدبلوماسي أفضى للتصعيد العسكري. اليوم، مع الهدنة، عاد الملف النووي للطاولة — لكن إيران فقدت ورقة ضغط مركزية بمقتل خامنئي.
+        </div>
+        <div class="card-meta">
+          <span class="meta-tag">ملف نووي</span>
+          <span class="meta-tag">ما بعد خامنئي</span>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <span class="card-cat">⚠️ تحذيرات إقليمية</span>
+        <div class="card-title">قطر وتركيا والأمم المتحدة حذّرت مبكراً</div>
+        <div class="card-body">
+          قبل اندلاع الحرب، حذّر فاعلون إقليميون وعلى رأسهم <strong>قطر</strong> من أن أي تصعيد قد يؤدي إلى عواقب وخيمة على الشرق الأوسط. تحذيراتهم لم تُسمع — لكنهم أصبحوا الوسطاء الرئيسيين لإنهاء النزاع.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end center -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- ALERT LEVEL -->
+    <div class="alert-box">
+      <div class="alert-level">⚠️ مستوى التهديد الإقليمي</div>
+      <div class="alert-status">🟡 هدنة هشة</div>
+      <div class="alert-sub">وقف إطلاق نار لأسبوعين — المفاوضات جارية — الوضع قابل للانفجار</div>
+    </div>
+
+    <!-- MAP -->
+    <div class="sidebar-title">🗺️ خريطة التوترات</div>
+    <div class="map-box">
+      <div class="map-visual">
+        <div class="map-dot usa"></div>
+        <div class="map-dot iran"></div>
+        <div class="map-dot israel"></div>
+        <div class="map-dot russia"></div>
+        <div class="map-dot china"></div>
+        <span style="font-size:10px; color:#333; z-index:1;">منطقة الشرق الأوسط</span>
+      </div>
+      <div class="map-legend">
+        <div class="ml-item"><div class="ml-dot" style="background:#3498db"></div>أمريكا</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#e74c3c"></div>إيران</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#2ecc71"></div>إسرائيل</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#e67e22"></div>روسيا</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#f39c12"></div>الصين</div>
+      </div>
+    </div>
+
+    <!-- BREAKING -->
+    <div class="sidebar-title">أخبار عاجلة</div>
+
+    <div class="breaking-item">
+      <div class="bi-cat">🔴 عاجل</div>
+      <div class="bi-text">إيران تشكّل مجلس قيادة مؤقتاً بعد مقتل خامنئي</div>
+      <div class="bi-time">منذ 14 يوم</div>
+    </div>
+    <div class="breaking-item">
+      <div class="bi-cat">🟡 هدنة</div>
+      <div class="bi-text">المفاوضات النووية ستستأنف خلال الهدنة وفق مصادر دبلوماسية</div>
+      <div class="bi-time">منذ يومين</div>
+    </div>
+    <div class="breaking-item">
+      <div class="bi-cat">🟠 اقتصاد</div>
+      <div class="bi-text">أسواق النفط تتعافى تدريجياً بعد إعلان الهدنة</div>
+      <div class="bi-time">منذ 3 أيام</div>
+    </div>
+    <div class="breaking-item">
+      <div class="bi-cat">🔵 تحقيق</div>
+      <div class="bi-text">تقارير: أنظمة دفاع جوي صينية في إيران تثير قلق واشنطن</div>
+      <div class="bi-time">منذ 5 أيام</div>
+    </div>
+    <div class="breaking-item">
+      <div class="bi-cat">🔴 إقليمي</div>
+      <div class="bi-text">قطر تعتقل 10 عناصر من الحرس الثوري الإيراني على أراضيها</div>
+      <div class="bi-time">منذ 3 أسابيع</div>
+    </div>
+
+    <!-- POLL -->
+    <div class="poll-box">
+      <div class="poll-q">هل ستصمد الهدنة وتتحول لاتفاق دائم؟</div>
+      <button class="poll-opt" onclick="vote(this,0)">نعم، ستنتهي الحرب</button>
+      <button class="poll-opt" onclick="vote(this,1)">لا، ستعود المعارك</button>
+      <button class="poll-opt" onclick="vote(this,2)">الوضع ضبابي</button>
+      <div class="poll-result" id="poll-result">
+        <div class="pr-bar-wrap">
+          <div class="pr-label"><span>نعم</span><span id="r0">24%</span></div>
+          <div class="pr-track"><div class="pr-fill" id="f0" style="width:0;background:#27ae60"></div></div>
+        </div>
+        <div class="pr-bar-wrap">
+          <div class="pr-label"><span>لا</span><span id="r1">51%</span></div>
+          <div class="pr-track"><div class="pr-fill" id="f1" style="width:0;background:#e74c3c"></div></div>
+        </div>
+        <div class="pr-bar-wrap">
+          <div class="pr-label"><span>ضبابي</span><span id="r2">25%</span></div>
+          <div class="pr-track"><div class="pr-fill" id="f2" style="width:0;background:#f39c12"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end sidebar -->
+
+</div><!-- end main -->
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div style="font-size:11px; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:16px;">📚 المصادر والمراجع</div>
+  <div class="sources-grid">
+    <div class="src-card">
+      <div class="src-org">🌐 الجزيرة نت</div>
+      <div class="src-desc">حرب إيران بالحقائق والأرقام — من الغارة الأولى إلى الهدنة — أبريل 2026</div>
+      <div class="src-url">aljazeera.net</div>
+    </div>
+    <div class="src-card">
+      <div class="src-org">📖 ويكيبيديا العربية</div>
+      <div class="src-desc">الضربات الأمريكية الإسرائيلية على إيران 2026 — توثيق شامل</div>
+      <div class="src-url">ar.wikipedia.org</div>
+    </div>
+    <div class="src-card">
+      <div class="src-org">📺 سكاي نيوز عربية</div>
+      <div class="src-desc">تغطية مباشرة لآخر تطورات الحرب على طهران — أبريل 2026</div>
+      <div class="src-url">skynewsarabia.com</div>
+    </div>
+    <div class="src-card">
+      <div class="src-org">🔍 موقع الدفاع العربي</div>
+      <div class="src-desc">هل تجرب الصين أسلحتها في إيران؟ — أبريل 2026</div>
+      <div class="src-url">defense-arabic.com</div>
+    </div>
+    <div class="src-card">
+      <div class="src-org">📡 CBS News (نقلاً)</div>
+      <div class="src-desc">تقارير استخباراتية عن الدعم الصيني الروسي لإيران — أبريل 2026</div>
+      <div class="src-url">cbsnews.com</div>
+    </div>
+    <div class="src-card">
+      <div class="src-org">🗞️ اليوم السابع</div>
+      <div class="src-desc">تطورات الهجوم الأمريكي الإسرائيلي على إيران وأعداد الخسائر — مارس 2026</div>
+      <div class="src-url">youm7.com</div>
+    </div>
+  </div>
+  <div style="margin-top:14px; font-size:11px; color:var(--muted); text-align:center; padding-top:12px; border-top:1px solid #2a2a3e;">
+    ⚠️ جميع المعلومات مستندة لمصادر إخبارية معتمدة — آخر تحديث: 22 أبريل 2026
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="studio-footer">
+  <div class="footer-brand">📡 AKRAM NEWS NETWORK</div>
+  <div class="footer-nav">
+    <a href="vape-news-studio.html">🚭 نشرة الفيب</a>
+    <a href="#">🌍 العالم</a>
+    <a href="#">📊 إحصائيات</a>
+  </div>
+  <div id="date-footer"></div>
+</div>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+    document.getElementById('date-footer').textContent =
+      now.toLocaleDateString('ar-MA', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  function showSection(id, btn) {
+    document.querySelectorAll('.news-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function vote(btn, idx) {
+    if (document.querySelector('.poll-opt.voted')) return;
+    btn.classList.add('voted');
+    document.querySelectorAll('.poll-opt').forEach(b => b.disabled = true);
+    document.getElementById('poll-result').classList.add('show');
+    const pcts = [24, 51, 25];
+    setTimeout(() => {
+      ['f0','f1','f2'].forEach((id, i) => {
+        document.getElementById(id).style.width = pcts[i] + '%';
+      });
+    }, 100);
+  }
+</script>
+</body>
+</html>
