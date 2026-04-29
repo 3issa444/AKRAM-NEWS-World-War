@@ -345,35 +345,7 @@
   }
   .alert-sub { font-size: 11px; color: #c5c0b5; margin-top: 6px; line-height: 1.5; }
 
-  /* MAP BOX */
-  .map-box {
-    background: var(--dark3); border: 1px solid #2a2a3e;
-    border-radius: 10px; padding: 14px; margin-bottom: 20px;
-  }
-  .map-visual {
-    background: #0d1a1a;
-    border-radius: 8px; height: 160px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; color: var(--muted); margin-bottom: 12px;
-    position: relative; overflow: hidden;
-    border: 1px solid #1a2e2e;
-  }
-  .map-dot {
-    position: absolute; width: 10px; height: 10px;
-    border-radius: 50%; animation: radar 2s ease-in-out infinite;
-  }
-  @keyframes radar {
-    0%,100%{transform:scale(1); opacity:1}
-    50%{transform:scale(2.5); opacity:0.3}
-  }
-  .map-dot.usa { background:#3498db; top:35%; left:15%; animation-delay:0s; }
-  .map-dot.iran { background:#e74c3c; top:40%; left:62%; animation-delay:0.5s; }
-  .map-dot.israel { background:#2ecc71; top:44%; left:55%; animation-delay:0.3s; }
-  .map-dot.russia { background:#e67e22; top:22%; left:65%; animation-delay:0.7s; }
-  .map-dot.china { background:#f39c12; top:38%; left:80%; animation-delay:1s; }
-  .map-legend { display: flex; flex-wrap: wrap; gap: 8px; }
-  .ml-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #b0aaa0; }
-  .ml-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
 
   /* BREAKING ITEMS */
   .breaking-item { padding: 12px 0; border-bottom: 1px solid #1e1e2a; cursor: pointer; transition: padding-right 0.2s; }
@@ -805,25 +777,7 @@
       <div class="alert-sub">وقف إطلاق نار لأسبوعين — المفاوضات جارية — الوضع قابل للانفجار</div>
     </div>
 
-    <!-- MAP -->
-    <div class="sidebar-title">🗺️ خريطة التوترات</div>
-    <div class="map-box">
-      <div class="map-visual">
-        <div class="map-dot usa"></div>
-        <div class="map-dot iran"></div>
-        <div class="map-dot israel"></div>
-        <div class="map-dot russia"></div>
-        <div class="map-dot china"></div>
-        <span style="font-size:10px; color:#333; z-index:1;">منطقة الشرق الأوسط</span>
-      </div>
-      <div class="map-legend">
-        <div class="ml-item"><div class="ml-dot" style="background:#3498db"></div>أمريكا</div>
-        <div class="ml-item"><div class="ml-dot" style="background:#e74c3c"></div>إيران</div>
-        <div class="ml-item"><div class="ml-dot" style="background:#2ecc71"></div>إسرائيل</div>
-        <div class="ml-item"><div class="ml-dot" style="background:#e67e22"></div>روسيا</div>
-        <div class="ml-item"><div class="ml-dot" style="background:#f39c12"></div>الصين</div>
-      </div>
-    </div>
+
 
     <!-- BREAKING -->
     <div class="sidebar-title">أخبار عاجلة</div>
